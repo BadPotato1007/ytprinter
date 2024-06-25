@@ -25,7 +25,7 @@ def add_subtitles(video_path, segments, output_path='output_with_subs.mp4'):
         start = segment['start']
         end = segment['end']
         text = segment['text'].strip()
-        subtitle = TextClip(text, fontsize=16, color='white', method='label', bg_color='transparent', stroke_color='black', stroke_width=5)
+        subtitle = TextClip(text, fontsize=16, color='white', size = video.size, method='caption', bg_color='transparent', stroke_color='black', stroke_width=5)
         subtitle = subtitle.set_position(('center', 'bottom')).set_start(start).set_duration(end - start)
         subtitles.append(subtitle)
 
