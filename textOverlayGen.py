@@ -14,7 +14,7 @@ def download_youtube_video(url, output_path='video.mp4'):
 
 def transcribe_video(video_path):
     model = whisper.load_model("base")
-    result = model.transcribe(video_path)
+    result = model.transcribe(video_path, word_timestamps=True)
     return result["segments"]
 
 def add_subtitles(video_path, segments, output_path='output_with_subs.mp4'):
@@ -25,7 +25,16 @@ def add_subtitles(video_path, segments, output_path='output_with_subs.mp4'):
         start = segment['start']
         end = segment['end']
         text = segment['text'].strip()
-        subtitle = TextClip(text, fontsize=16, color='white', size = video.size, method='caption', bg_color='transparent', stroke_color='black', stroke_width=5)
+        subtitle = TextClip(
+            text,
+            font="../fonts/bold_font.ttf",
+            fontsize=10,
+            color="#FFFF00",
+            stroke_color="black",
+            stroke_width=0.5,
+        )
+        
+        
         subtitle = subtitle.set_position(('center', 'bottom')).set_start(start).set_duration(end - start)
         subtitles.append(subtitle)
 
@@ -34,9 +43,9 @@ def add_subtitles(video_path, segments, output_path='output_with_subs.mp4'):
 
 def main(url):
     # Step 1: Download the video
-    video_path = download_youtube_video(url)
-    print("Downloaded video to:", video_path)
-    
+    # video_path = download_youtube_video(url)
+    # print("Downloaded video to:", video_path)
+    video_path = "./video.mp4"
     # Step 2: Transcribe the video to get subtitles with timestamps
     segments = transcribe_video(video_path)
     print("Transcription segments:", segments)
