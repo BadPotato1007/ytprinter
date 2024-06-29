@@ -25,7 +25,7 @@ def transcribe_video(video_path):
     return result['segments']
 
 
-def add_subtitles(video_path, segment, output_path='output_with_subs.mp4'):
+def add_subtitles(video_path, segment, output_path='output.mp4'):
     video = VideoFileClip(video_path)
     subtitles = []
     data = segment
@@ -48,7 +48,7 @@ def add_subtitles(video_path, segment, output_path='output_with_subs.mp4'):
                 font="../fonts/agencyr.ttf",
                 fontsize=35,
                 color="white",
-                stroke_color="black",
+                stroke_color="white",
                 stroke_width=1,
             )
             print("added word")
@@ -77,5 +77,5 @@ def main(url):
 
 if __name__ == "__main__":
     # Replace with your YouTube URL
-    youtube_url = 'https://www.youtube.com/shorts/yBfqEcxZXdI'
+    youtube_url = input("enter youtube url: ")
     main(youtube_url)
